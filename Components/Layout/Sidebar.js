@@ -21,10 +21,10 @@ const Sidebar = ({isOpen, toggleHit}) => {
           <Link href={'/tables/create'}>Create Table</Link>
           </li>
           <li className="p-4 hover:bg-gray-700 uppercase">
-            <a href="#">Show Records</a>
+            <a href="#" disabled >Show Records</a>
           </li>
           <li className="p-4 hover:bg-gray-700 uppercase">
-            <a href="#">Create Records</a>
+            <a href="#" disabled>Create Records</a>
           </li>
         </ul>
       </nav>
