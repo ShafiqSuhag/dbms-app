@@ -9,13 +9,15 @@ export default function createTableHandler(req, res) {
 
   // Retrieve the table name and columns from the request body
   const { tableName, columns } = req.body;
+  require('dotenv').config();
+  const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE } = process.env;
 
   // Configure your MySQL connection
   const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'sohag',
-    password: '1',
-    database: 'dbms_app',
+    host: DB_HOST,
+    user: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_DATABASE,
   });
 
   // Connect to the MySQL server
@@ -31,8 +33,7 @@ export default function createTableHandler(req, res) {
       ${columns
         .map(
           (column) =>
-            `${column.name} ${column.type}${column.length ? `(${column.length})` : ''}${
-              column.defaultValue ? ` DEFAULT '${column.defaultValue}'` : ''
+            `${column.name} ${column.type}${column.length ? `(${column.length})` : ''}${column.defaultValue ? ` DEFAULT '${column.defaultValue}'` : ''
             }`
         )
         .join(',\n')}
