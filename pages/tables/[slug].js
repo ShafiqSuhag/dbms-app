@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import PrimaryLayout from '../../Components/Layout/PrimaryLayout';
 
 const TableDetailsPage = () => {
     const router = useRouter();
     const [tableDetails, setTableDetails] = useState([]);
     let slug = router.query.slug;
 
-   
+
     console.log("slug", slug)
     useEffect(() => {
         const tableName = router.query.slug; // Replace with your actual table name
@@ -27,32 +28,35 @@ const TableDetailsPage = () => {
     }, [router.query.slug]);
 
     return (
-        <div>
-            <h1>Table Details</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Field</th>
-                        <th>Type</th>
-                        <th>Null</th>
-                        <th>Key</th>
-                        <th>Extra</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {tableDetails.map((field) => (
-                        <tr key={field.Field}>
-                            <td>{field.Field}</td>
-                            <td>{field.Type}</td>
-                            <td>{field.Null}</td>
-                            <td>{field.Key}</td>
-                            <td>{field.Extra}</td>
+        <PrimaryLayout>
+            <div>
+                <h1>Table Details</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Null</th>
+                            <th>Key</th>
+                            <th>Extra</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-            <h3><Link href="/tables"> SEE TABLE LIST  </Link>  </h3>
-        </div>
+                    </thead>
+                    <tbody>
+                        {tableDetails.map((field) => (
+                            <tr key={field.Field}>
+                                <td>{field.Field}</td>
+                                <td>{field.Type}</td>
+                                <td>{field.Null}</td>
+                                <td>{field.Key}</td>
+                                <td>{field.Extra}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <h3><Link href="/tables"> SEE TABLE LIST  </Link>  </h3>
+            </div>
+        </PrimaryLayout>
+
     );
 };
 

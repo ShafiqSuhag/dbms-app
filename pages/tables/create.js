@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import PrimaryLayout from '../../Components/Layout/PrimaryLayout';
 
 const CreateTablePage = () => {
     const [tableName, setTableName] = useState('');
@@ -126,88 +127,92 @@ const CreateTablePage = () => {
     //////////////////////////////////------------
 
     return (
-        <div>
-            <h1>Create New Table</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="table-name">Table Name:</label>
-                    <input
-                        type="text"
-                        id="table-name"
-                        value={tableName}
-                        onChange={handleTableNameChange}
-                        required
-                    />
-                </div>
+        <PrimaryLayout>
 
-                <h2>Columns</h2>
-                <div disabled style={{padding:"20px"}}>
-                    <label htmlFor="">Primary Column</label>
-                    <br />
-                    <input
-                        disabled
-                        type="text"
-                        placeholder="id"
-                        value={"id"}
-                    />
-                    <select
-                        disabled
-                        value={""}
-                    >
-                        <option value="">int</option>
-                    </select>
-                    <input
-                        disabled
-                        type="text"
-                        placeholder="Length"
-                        value={"11"}
-                    />
-                </div>
-                {columns.map((column, index) => (
-                    <div key={index}>
+
+            <div>
+                <h1>Create New Table</h1>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="table-name">Table Name:</label>
                         <input
                             type="text"
-                            placeholder="Column Name"
-                            value={column.name}
-                            onChange={(event) => handleColumnNameChange(index, event)}
+                            id="table-name"
+                            value={tableName}
+                            onChange={handleTableNameChange}
                             required
+                        />
+                    </div>
+
+                    <h2>Columns</h2>
+                    <div disabled style={{ padding: "20px" }}>
+                        <label htmlFor="">Primary Column</label>
+                        <br />
+                        <input
+                            disabled
+                            type="text"
+                            placeholder="id"
+                            value={"id"}
                         />
                         <select
-                            value={column.type}
-                            onChange={(event) => handleColumnTypeChange(index, event)}
-                            required
+                            disabled
+                            value={""}
                         >
-                            <option value="">Select Type</option>
-                            {renderColumnTypeOptions()}
+                            <option value="">int</option>
                         </select>
                         <input
+                            disabled
                             type="text"
                             placeholder="Length"
-                            value={column.length}
-                            onChange={(event) => handleColumnLengthChange(index, event)}
+                            value={"11"}
                         />
-                        {/* <input
+                    </div>
+                    {columns.map((column, index) => (
+                        <div key={index}>
+                            <input
+                                type="text"
+                                placeholder="Column Name"
+                                value={column.name}
+                                onChange={(event) => handleColumnNameChange(index, event)}
+                                required
+                            />
+                            <select
+                                value={column.type}
+                                onChange={(event) => handleColumnTypeChange(index, event)}
+                                required
+                            >
+                                <option value="">Select Type</option>
+                                {renderColumnTypeOptions()}
+                            </select>
+                            <input
+                                type="text"
+                                placeholder="Length"
+                                value={column.length}
+                                onChange={(event) => handleColumnLengthChange(index, event)}
+                            />
+                            {/* <input
                             type="text"
                             placeholder="Default Value"
                             value={column.defaultValue}
                             onChange={(event) => handleColumnDefaultValueChange(index, event)}
                         /> */}
-                        {index !== 0 && (
-                            <button type="button" onClick={() => handleRemoveColumn(index)}>
-                                Remove
-                            </button>
-                        )}
-                    </div>
-                ))}
+                            {index !== 0 && (
+                                <button type="button" onClick={() => handleRemoveColumn(index)}>
+                                    Remove
+                                </button>
+                            )}
+                        </div>
+                    ))}
 
-                <button type="button" onClick={handleAddColumn}>
-                    Add Column
-                </button>
+                    <button type="button" onClick={handleAddColumn}>
+                        Add Column
+                    </button>
 
-                <button type="submit">Create Table</button>
-            </form>
-            <h3><Link href="/tables"> SEE TABLE LIST  </Link>  </h3>
-        </div>
+                    <button type="submit">Create Table</button>
+                </form>
+                <h3><Link href="/tables"> SEE TABLE LIST  </Link>  </h3>
+            </div>
+        </PrimaryLayout>
     );
 };
 
