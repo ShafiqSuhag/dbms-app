@@ -14,7 +14,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="#">DBMS CLOUD</a>
+          Welcome to <a href="#">CLOUD DBMS</a>
         </h1>
 
         <p className={styles.description}>
