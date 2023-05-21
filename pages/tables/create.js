@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import PrimaryLayout from '../../Components/Layout/PrimaryLayout';
 
 const CreateTablePage = () => {
@@ -99,6 +100,7 @@ const CreateTablePage = () => {
             if (response.ok) {
                 // Request succeeded
                 // Handle the response data or perform any other action
+                toast('Table created successfully')
                 console.log('Table created successfully');
             } else {
                 // Request failed
@@ -131,21 +133,29 @@ const CreateTablePage = () => {
 
 
             <div>
-                <h1>Create New Table</h1>
+                <div className='px-1 py-5'>
+                    <h1 className="text-3xl font-bold text-blue-500">
+                        Create New Table
+                    </h1>
+                    <h5 className="py-1">Note: column name ID will be autometically, as default primary key.</h5>
+                </div>
+
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="table-name">Table Name:</label>
-                        <input
+                        <label className='minimal-label' htmlFor="table-name">Table Name:</label>
+                        {/* <input
                             type="text"
                             id="table-name"
                             value={tableName}
                             onChange={handleTableNameChange}
                             required
-                        />
+                        /> */}
+                        <input id="table-name" className="minimal-text-input" value={tableName} onChange={handleTableNameChange} type="text" placeholder="Table Name"></input>
                     </div>
 
-                    <h2>Columns</h2>
+                    <h2 className='text-2xl py-5'>Column Details</h2>
                     <div disabled style={{ padding: "20px" }}>
+
                         <label htmlFor="">Primary Column</label>
                         <br />
                         <input
@@ -153,6 +163,7 @@ const CreateTablePage = () => {
                             type="text"
                             placeholder="id"
                             value={"id"}
+
                         />
                         <select
                             disabled
@@ -165,11 +176,13 @@ const CreateTablePage = () => {
                             type="text"
                             placeholder="Length"
                             value={"11"}
+
                         />
                     </div>
                     {columns.map((column, index) => (
-                        <div key={index}>
+                        <div key={index} className='mb-2'>
                             <input
+                                className="minimal-text-input"
                                 type="text"
                                 placeholder="Column Name"
                                 value={column.name}
@@ -177,6 +190,7 @@ const CreateTablePage = () => {
                                 required
                             />
                             <select
+                                className="minimal-text-input text-left"
                                 value={column.type}
                                 onChange={(event) => handleColumnTypeChange(index, event)}
                                 required
@@ -185,6 +199,7 @@ const CreateTablePage = () => {
                                 {renderColumnTypeOptions()}
                             </select>
                             <input
+                                className="minimal-text-input"
                                 type="text"
                                 placeholder="Length"
                                 value={column.length}
@@ -197,20 +212,23 @@ const CreateTablePage = () => {
                             onChange={(event) => handleColumnDefaultValueChange(index, event)}
                         /> */}
                             {index !== 0 && (
-                                <button type="button" onClick={() => handleRemoveColumn(index)}>
+                                <button className="button-yellow-shadow ml-5" type="button" onClick={() => handleRemoveColumn(index)}>
                                     Remove
                                 </button>
                             )}
                         </div>
                     ))}
 
-                    <button type="button" onClick={handleAddColumn}>
-                        Add Column
-                    </button>
+                    <div className='py-5'>
+                        <button className='button-blue-shadow mr-5' type="button" onClick={handleAddColumn}>
+                            Add Column
+                        </button>
 
-                    <button type="submit">Create Table</button>
+                        <button className="button-green-shadow" type="submit">Create Table</button>
+                    </div>
+
                 </form>
-                <h3><Link href="/tables"> SEE TABLE LIST  </Link>  </h3>
+                <h3 className='text-xl text-gray-700 font-semibold hover:text-blue-500  '><Link href="/tables"> SEE TABLE LIST  </Link>  </h3>
             </div>
         </PrimaryLayout>
     );

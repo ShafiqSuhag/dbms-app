@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from './Sidebar';
 
 
@@ -31,8 +33,9 @@ const PrimaryLayout = ({ children }) => {
 
 
 
-      </div>
       {/* Main Content  //*/}
+      <ToastContainer />
+      </div>
 
     </>
   );
